@@ -1,8 +1,8 @@
-import React, { useRef, createRef} from 'react';
-import {View, Text, TouchableOpacity, Image, Animated} from 'react-native';
+import React, { useRef, createRef } from 'react';
+import { View, Text, TouchableOpacity, Image, Animated } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
-import {Home, Profile, Search} from '../../screens';
-import {COLORS, SIZES, FONTS, constants} from '../../constants';
+import { Home, Profile, Search } from '../../screens';
+import { COLORS, SIZES, FONTS, constants } from '../../constants';
 
 const bottom_tabs = constants.bottom_tabs.map((bottom_tabs) => ({
     ...bottom_tabs,
@@ -11,16 +11,18 @@ const bottom_tabs = constants.bottom_tabs.map((bottom_tabs) => ({
 
 const Tabs = ({ scrollX }) => {
     return(
-        <View style={{ flex: 1, flexDirection: 'row' }} >
-            {bottom_tabs.map((item, index) => {
-                return(
-                    <TouchableOpacity key={`BottomTab-${index}`} ref={item.ref} style={{ flex: 1, paddingHorizontal: 15, alignItems: 'center', justifyContent:'center' }} >
+      <View style={{ flex: 1, flexDirection: 'row' }} >
 
-                    </TouchableOpacity>
-                )
-            })}
-
-        </View>
+        {/* Tabs */}
+        {bottom_tabs.map((item, index) => {
+          return(
+            <TouchableOpacity key={ `BottomTab-${index}`} ref={item.ref} style={{ flex: 1, paddingHorizontal: 15, alignItems: 'center', justifyContent:'center' }} >
+              <Image source={item.icon} resizeMode='contain' style={{ width: 25, height: 25 }} />
+              <Text style={{marginTop: 3, color: COLORS.white, ...FONTS.h3}} >{item.label}</Text>
+            </TouchableOpacity>
+          )
+        })}
+      </View>
     )
 } 
 
@@ -50,9 +52,9 @@ const MainLayout = () => {
           renderItem={({item, index}) => {
             return (
               <View style={{height: SIZES.height, width: SIZES.width}}>
-                {item.label == constants.screens.home && <Home />}
-                {item.label == constants.screens.search && <Search />}
-                {item.label == constants.screens.profile && <Profile />}
+                { item.label == constants.screens.home && <Home /> }
+                { item.label == constants.screens.search && <Search /> }
+                { item.label == constants.screens.profile && <Profile /> }
               </View>
             );
           }}
@@ -63,15 +65,15 @@ const MainLayout = () => {
 
   function renderBottomTab() {
     return(
-        <View style={{ marginBottom: 20, paddingHorizontal: SIZES.padding, paddingVertical: SIZES.radius }}>
-            <Shadow size={[SIZES.width - (SIZES.padding * 2), 85]} >
-                <View style={{ flex: 1, borderRadius: SIZES.radius, backgroundColor: COLORS.primary3 }}>
-                    <Tabs
-                        scrollX={scrollX}
-                    />
-                </View>
-            </Shadow>
-        </View>
+      <View style={{ marginBottom: 20, paddingHorizontal: SIZES.padding, paddingVertical: SIZES.radius  }}>
+        <Shadow size={[SIZES.width - (SIZES.padding * 2), 85]} >
+          <View style={{ flex: 1, borderRadius: SIZES.radius, backgroundColor: COLORS.primary3 }} >
+            <Tabs
+              scrollX={scrollX}
+            />
+          </View>
+         </Shadow>
+      </View>
     )
   }
 
